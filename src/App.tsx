@@ -60,7 +60,7 @@ export default function App() {
         ))}
       </ToggleGroup>
 
-      <aside className="glass absolute top-4 left-4 grid w-max gap-4 rounded-[20px] p-[18px] max-lg:top-auto max-lg:right-3 max-lg:bottom-12 max-lg:left-3 max-lg:w-auto max-lg:gap-3 max-lg:p-4">
+      <aside className="glass absolute top-4 left-4 grid w-max gap-4 rounded-[20px] p-[18px] lg:[zoom:1.4] max-lg:top-auto max-lg:right-3 max-lg:bottom-12 max-lg:left-3 max-lg:w-auto max-lg:gap-3 max-lg:p-4">
         <header className="flex items-center gap-2">
           <a href="https://time2map.com" target="_blank" rel="noopener" title="Visit time2map.com" aria-label="time2map">
             <span className="block [&>svg]:block [&>svg]:h-[22px] [&>svg]:w-auto" dangerouslySetInnerHTML={{ __html: logo }} />
