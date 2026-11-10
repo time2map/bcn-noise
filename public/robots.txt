@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bcn-noise.time2map.com/sitemap.xml

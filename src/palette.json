@@ -1,0 +1,6 @@
+{
+  "_": "ColorBrewer RdYlBu, 7 classes, reversed (blue = quiet). One scale for day and night so they can be compared. breaks in dB(A); alpha of the raster tiles. Used by the map (src/sound.ts) and baked into the noise tiles (scripts/build-data.sh).",
+  "breaks": [45, 50, 55, 60, 65, 70],
+  "colors": ["#4575b4", "#91bfdb", "#e0f3f8", "#ffffbf", "#fee090", "#fc8d59", "#d73027"],
+  "alpha": 0.8
+}
