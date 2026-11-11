@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Moon, Sun } from 'lucide-react'
+import { ArrowUpRight, Moon, Sun } from 'lucide-react'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
@@ -47,7 +47,7 @@ export default function App() {
         onValueChange={(v) => v && setPeriod(v as Period)}
         aria-label="Time of day"
         spacing={1}
-        className="glass absolute top-4 left-1/2 -translate-x-1/2 rounded-full p-1 max-lg:top-3"
+        className="glass absolute top-4 left-1/2 -translate-x-1/2 rounded-full p-1 max-lg:top-3 max-sm:left-3 max-sm:translate-x-0"
       >
         {([['day', Sun, 'Day'], ['night', Moon, 'Night']] as const).map(([value, Icon, text]) => (
           <ToggleGroupItem
@@ -59,6 +59,15 @@ export default function App() {
           </ToggleGroupItem>
         ))}
       </ToggleGroup>
+
+      <a
+        href="https://time2map.com/contact-us"
+        target="_blank"
+        rel="noopener"
+        className="glass absolute top-4 right-4 flex h-10.5 items-center gap-1 rounded-full px-4 text-sm font-medium whitespace-nowrap max-lg:top-3 max-lg:right-3 [&>svg]:size-4 [&>svg]:transition-transform hover:[&>svg]:translate-x-0.5 hover:[&>svg]:-translate-y-0.5"
+      >
+        Contact us <ArrowUpRight />
+      </a>
 
       <aside className="glass absolute top-4 left-4 grid w-max gap-4 rounded-[20px] p-[18px] lg:[zoom:1.4] max-lg:top-auto max-lg:right-3 max-lg:bottom-12 max-lg:left-3 max-lg:w-auto max-lg:gap-3 max-lg:p-4">
         <header className="flex items-center gap-2">
