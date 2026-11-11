@@ -130,6 +130,7 @@
 }
 /* Liquid glass, after walkability.time2map.com */
 .glass,
+.noise-tip .mapboxgl-popup-content,
 .mapboxgl-ctrl-attrib.mapboxgl-compact,
 .mapboxgl-ctrl-group:not(:empty) {
   background: rgb(255 255 255 / 0.6);
@@ -138,7 +139,7 @@
   -webkit-backdrop-filter: blur(20px) saturate(1.6);
   backdrop-filter: blur(20px) saturate(1.6);
 }
-.dark :is(.glass, .mapboxgl-ctrl-attrib.mapboxgl-compact, .mapboxgl-ctrl-group:not(:empty)) {
+.dark :is(.glass, .noise-tip .mapboxgl-popup-content, .mapboxgl-ctrl-attrib.mapboxgl-compact, .mapboxgl-ctrl-group:not(:empty)) {
   background: rgb(12 12 18 / 0.55);
   border-color: rgb(255 255 255 / 0.1);
   box-shadow: 0 10px 30px rgb(0 0 0 / 0.35), 0 1px 3px rgb(0 0 0 / 0.3);
@@ -161,6 +162,19 @@ body,
   border-radius: 12px;
   font: 11px/1.5 var(--font-sans);
   color: var(--foreground);
+}
+/* hover tooltip of the noise layer; lets the cursor through so it keeps following the map */
+.noise-tip {
+  pointer-events: none;
+}
+.noise-tip .mapboxgl-popup-content {
+  border-radius: 12px;
+  padding: 6px 10px;
+  font: 13px/1.35 var(--font-sans);
+  color: var(--foreground);
+}
+.noise-tip .mapboxgl-popup-tip {
+  display: none;
 }
 .mapboxgl-ctrl-group button + button {
   border-top-color: var(--border);

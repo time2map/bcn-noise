@@ -6,7 +6,7 @@
 #                                           resampling; ZOOM_LEVEL_STRATEGY=UPPER gives z16 at ~4× the size).
 #                                           NEAREST: GDAL’s OpenCL bilinear warp kernel fails on macOS.
 #   facades.pmtiles (z14)                   layer f: noise points 3 m outside each facade (building b, side, dir, ld, ln)
-#                                           layer h: residential building footprints (Catastro ref b). Mapbox Standard splits
+#                                           layer h: footprints of the homes with facade levels (Catastro ref b). Mapbox Standard splits
 #                                           buildings into parts by height: a clicked part belongs to the home whose
 #                                           footprint holds the part's centroid
 # Needs GDAL ≥ 3.1, tippecanoe ≥ 2.17, python3. SRC = bcn-property-finder/data, a sibling checkout by default (raw rasters + buildings/exposure.gpkg).
@@ -48,6 +48,14 @@ ogr2ogr -f GeoJSONSeq -t_srs EPSG:4326 -lco COORDINATE_PRECISION=6 "$TMP/f.geojs
   -sql "SELECT id AS b, side, dir, ROUND(ld) AS ld, ROUND(ln) AS ln, geom FROM facades WHERE ld IS NOT NULL AND ln IS NOT NULL"
 ogr2ogr -f GeoJSONSeq -t_srs EPSG:4326 -lco COORDINATE_PRECISION=6 "$TMP/h.geojsonl" "$SRC/buildings/buildings.gpkg" \
   -sql "SELECT id AS b, geom FROM buildings"
+# only homes with facade levels: the map dims and ignores every other building
+python3 - "$TMP" <<'EOF'
+import json, sys
+d = sys.argv[1]
+ids = {json.loads(l)['properties']['b'] for l in open(f'{d}/f.geojsonl')}
+lines = [l for l in open(f'{d}/h.geojsonl') if json.loads(l)['properties']['b'] in ids]
+open(f'{d}/h.geojsonl', 'w').writelines(lines)
+EOF
 tippecanoe -q -f -o "$OUT/facades.pmtiles" -Z14 -z14 --no-feature-limit --no-tile-size-limit --no-tiny-polygon-reduction \
   -L "f:$TMP/f.geojsonl" -L "h:$TMP/h.geojsonl"
 

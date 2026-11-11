@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { colorExpression, soundLike } from './sound'
+import { classLabel, colorExpression, soundLike } from './sound'
 import { centroid, distanceM, inside } from './geo'
 
 describe('soundLike', () => {
@@ -8,6 +8,14 @@ describe('soundLike', () => {
     expect(soundLike(40)).toBe('a library')
     expect(soundLike(72)).toBe('a vacuum cleaner')
     expect(soundLike(95)).toBe('a food blender')
+  })
+})
+
+describe('classLabel', () => {
+  it('names the dB range of a colour class and a sound as loud', () => {
+    expect(classLabel(0)).toEqual(['under 45 dB', 'like a library'])
+    expect(classLabel(3)).toEqual(['55–60 dB', 'like a dishwasher'])
+    expect(classLabel(6)).toEqual(['over 70 dB', 'like a vacuum cleaner'])
   })
 })
 

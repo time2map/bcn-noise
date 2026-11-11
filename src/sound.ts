@@ -31,6 +31,13 @@ export function soundLike(db: number): string {
   return SOUNDS.findLast(([from]) => db >= from)![1]
 }
 
+/** What a colour class of the noise layer means: its dB range and an everyday sound about as loud (a library for the quietest). */
+export function classLabel(k: number): [string, string] {
+  const { breaks } = PALETTE
+  const range = k === 0 ? `under ${breaks[0]} dB` : k === breaks.length ? `over ${breaks[k - 1]} dB` : `${breaks[k - 1]}–${breaks[k]} dB`
+  return [range, `like ${soundLike(breaks[k - 1] ?? 40)}`]
+}
+
 export function colorExpression(input: ExpressionSpecification): ExpressionSpecification {
   return ['step', input, PALETTE.colors[0], ...PALETTE.breaks.flatMap((b, i) => [b, PALETTE.colors[i + 1]])] as ExpressionSpecification
 }
